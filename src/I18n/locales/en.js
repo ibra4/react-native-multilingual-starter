@@ -3,4 +3,5 @@ export default {
     please_select_a_language: 'Please Select a Language',
     submit: 'Submit',
     settings: 'Settings',
+    home_page: 'Home Page',
 };
