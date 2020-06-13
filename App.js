@@ -7,10 +7,9 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, AsyncStorage, I18nManager } from 'react-native';
 
 import I18n from './src/I18n/index';
-import Layout from './src/components/layout/default/Layout';
 
 import Settings from './src/scenes/Settings';
 import Router from './src/Router';

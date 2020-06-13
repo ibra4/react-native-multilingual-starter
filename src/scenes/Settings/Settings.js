@@ -27,6 +27,7 @@ export default function Settings() {
             if (selectedValue === 'ar') {
                 I18nManager.forceRTL(true);
             } else {
+                I18nManager.allowRTL(false);
                 I18nManager.forceRTL(false);
             }
             RNRestart.Restart();
