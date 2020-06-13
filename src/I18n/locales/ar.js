@@ -4,4 +4,5 @@ export default {
     submit: 'تطبيق',
     settings: 'الإعدادات',
     home_page: 'الصفحة الرئيسية',
+    back: 'رجوع',
 };

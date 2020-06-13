@@ -24,13 +24,12 @@ const App: () => React$Node = () => {
         async function getLocaleFromStorage() {
             const locale = await AsyncStorage.getItem('default_lang');
             if (locale) {
-                console.warn('start : ', locale);
                 I18n.locale = locale;
+                setStatus('success');
             } else {
                 I18n.locale = I18n.locale.substring(0, 2);
                 setStatus('missing_lang');
             }
-            setStatus('success');
         }
         getLocaleFromStorage();
     }, []);

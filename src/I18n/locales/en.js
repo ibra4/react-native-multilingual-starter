@@ -4,4 +4,5 @@ export default {
     submit: 'Submit',
     settings: 'Settings',
     home_page: 'Home Page',
+    back: 'Back',
 };

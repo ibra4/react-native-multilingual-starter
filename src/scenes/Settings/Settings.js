@@ -14,31 +14,36 @@ import I18n from '../../I18n';
 import RNRestart from 'react-native-restart';
 import Layout from '../../components/layout/default/Layout';
 
-export default function Settings({ init = false }) {
+export default function Settings() {
+    const [isNew, setIsNew] = useState(true);
     const [selectedValue, setSelectedValue] = useState(null);
+    const [storageLanguage, setStorageLanguage] = useState(null);
     const [status, setStatus] = useState('loading');
 
     const setLanguage = async () => {
-        await AsyncStorage.setItem('default_lang', selectedValue);
-        I18n.locale = selectedValue;
-        if (selectedValue === 'ar') {
-            I18nManager.forceRTL(true);
-        } else {
-            I18nManager.forceRTL(false);
+        if (isNew || storageLanguage != selectedValue) {
+            await AsyncStorage.setItem('default_lang', selectedValue);
+            I18n.locale = selectedValue;
+            if (selectedValue === 'ar') {
+                I18nManager.forceRTL(true);
+            } else {
+                I18nManager.forceRTL(false);
+            }
+            RNRestart.Restart();
         }
-        RNRestart.Restart();
     };
 
     useEffect(() => {
         async function initSettings() {
-            if (init) {
+            const locale = await AsyncStorage.getItem('default_lang');
+            if (locale) {
+                setStorageLanguage(locale);
+                setSelectedValue(locale);
+                setIsNew(false);
+            } else {
                 setSelectedValue(I18n.locale.substring(0, 2));
                 I18n.locale = I18n.locale.substring(0, 2);
-            } else {
-                const locale = await AsyncStorage.getItem('default_lang');
-                if (locale) {
-                    setSelectedValue(locale);
-                }
+                setIsNew(true);
             }
             setStatus('success');
         }
@@ -79,11 +84,10 @@ export default function Settings({ init = false }) {
             <Text>Loading ...</Text>
         );
 
-    return init === true ? (
-        <Layout>{renderSettings()}</Layout>
-    ) : (
-        renderSettings()
-    );
+    const renderTemplate = () =>
+        isNew === true ? renderSettings() : <Layout>{renderSettings()}</Layout>;
+
+    return renderTemplate();
 }
 
 const styles = StyleSheet.create({
