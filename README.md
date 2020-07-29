@@ -6,4 +6,4 @@
  - RTL Support.
  - Change language on runtime without any problem
 
-### This project is not working with Expo, Because the native module : [react-native-restart](https://www.npmjs.com/package/react-native-restart) does not working with expo
+This project is not working with Expo, Because the native module : [react-native-restart](https://www.npmjs.com/package/react-native-restart) does not working with expo
